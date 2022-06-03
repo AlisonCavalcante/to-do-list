@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="content col-md-3">
+      <mat-card class="mt-3">
+        <form [formGroup]="todoForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome da Tarefa</mat-label>
+              <input formControlName="item" matInput placeholder="Placeholder">
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              <mat-hint>Adicione a Tarefa</mat-hint>
+            </mat-form-field>
+            <button (click)="addTarefa()" mat-raised-button [disabled]="todoForm.invalid" color="primary">Adicionar</button>
+        </form>
+      </mat-card>
+    </div>
+    <div class="col-md-9">
+      <div cdkDropListGroup>
+        <div class="row">
+          <div class="col-md-4">
+            <!--to do-->
+            <div class="example-container">
+              <h2>PARA FAZER</h2>
+
+              <div
+                cdkDropList
+                [cdkDropListData]="tarefas"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of tarefas" cdkDrag>{{item.descricao}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!--progress-->
+            <div class="example-container">
+              <h2>EM PROGRESSO</h2>
+
+              <div
+                cdkDropList
+                [cdkDropListData]="tarefasProgress"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of tarefasProgress" cdkDrag>{{item.descricao}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!--done-->
+            <div class="example-container">
+              <h2>FINALIZADAS</h2>
+
+              <div
+                cdkDropList
+                [cdkDropListData]="tarefasDone"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of tarefasDone" cdkDrag>{{item.descricao}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
